@@ -31,4 +31,5 @@ include(../plugin_template.pri)
 INCLUDEPATH += "$${BOOSTPATH}"
 
 OTHER_FILES += \
-    previewdds.json
+    previewdds.json\
+    SConscript
