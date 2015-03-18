@@ -2,24 +2,12 @@ Import('qt_env')
 
 env = qt_env.Clone()
 
-modules = [
-    'Core',
-    'Gui',
-    'OpenGL'
-]
-
-if env['QT_MAJOR_VERSION'] > 4:
-    modules += [ 'Widgets' ]
-
-env.EnableQt4Modules(['Qt' + n for n in modules],
-                     debug = env['CONFIG'] == 'debug')
+env.EnableQtModules('OpenGL')
 
 env.AppendUnique(CPPDEFINES = [
     'PREVIEWDDS_LIBRARY',
     'NOMINMAX'
 ])
-
-env.RequireLibraries('uibase')
 
 env.AppendUnique(CPPPATH = [
     '${BOOSTPATH}'
@@ -28,4 +16,4 @@ env.AppendUnique(CPPPATH = [
 lib = env.SharedLibrary('previewDDS',
                         env.Glob('*.cpp') + env.Glob('gl/*.cpp') +
                                                       env.Glob('gl/dds/*.cpp'))
-env.InstallPlugin(lib)
+env.InstallModule(lib)
